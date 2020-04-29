@@ -1,0 +1,3 @@
+rootProject.name='FartakAdSDK'
+include ':app'
+include ':adhub'
