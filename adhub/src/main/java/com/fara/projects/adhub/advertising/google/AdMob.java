@@ -156,9 +156,6 @@ public class AdMob {
         adView.setAdSize(new AdSize(280, 80));
         adView.setAdUnitId(zoneId);
 
-        adContainer.addView(adView);
-        adView.loadAd(new AdRequest.Builder().build());
-
         adView.setVideoOptions(new VideoOptions.Builder().setStartMuted(true).build());
 
         VideoController videoController = adView.getVideoController();
@@ -220,6 +217,9 @@ public class AdMob {
                     adShowListener.onAdClicked();
             }
         });
+
+        adContainer.addView(adView);
+        adView.loadAd(new AdRequest.Builder().build());
     }
 
     private static void buildNativeMediumViewAd(Context context, String zoneId, RelativeLayout adContainer, final AdHub.BannerAd.OnAdShowListener adShowListener) {
