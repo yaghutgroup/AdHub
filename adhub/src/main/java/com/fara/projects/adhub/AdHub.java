@@ -53,6 +53,7 @@ public class AdHub {
         }
 
         public static void showAd(final Context context, String zoneId, final OnAdShowListener adShowListener) {
+            Log.d("-----", "step 1");
             new HTTPRequestHelper().getVideoAdFromServer(context, zoneId, new HTTPRequestHelper.OnCallBackListener() {
                 @Override
                 public void OnResponse(String result) {

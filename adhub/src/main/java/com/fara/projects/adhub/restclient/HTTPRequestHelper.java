@@ -1,6 +1,7 @@
 package com.fara.projects.adhub.restclient;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.fara.projects.adhub.restclient.asyncs.GetAllSdkAppID;
 import com.fara.projects.adhub.restclient.asyncs.GetBannerNativeAd;
@@ -18,6 +19,7 @@ public class HTTPRequestHelper {
     }
 
     public void getVideoAdFromServer(Context context, String zoneId, OnCallBackListener callBackListener) {
+        Log.d("-----", "step 2");
         new GetVideoAd(context, zoneId, callBackListener);
     }
 

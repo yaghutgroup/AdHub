@@ -20,6 +20,7 @@ public class GetVideoAd extends AsyncTask<Void, Void, String> {
     private HTTPRequestHelper.OnCallBackListener callBackListener;
 
     public GetVideoAd(Context context, String zoneId, HTTPRequestHelper.OnCallBackListener callBackListener) {
+        Log.d("-----", "step 3");
         this.context = context;
         this.zoneId = zoneId;
         this.callBackListener = callBackListener;
@@ -32,6 +33,8 @@ public class GetVideoAd extends AsyncTask<Void, Void, String> {
 
     @Override
     protected String doInBackground(Void... voids) {
+        Log.d("-----", "step 4");
+
         String responseBody = "";
 
         try {
