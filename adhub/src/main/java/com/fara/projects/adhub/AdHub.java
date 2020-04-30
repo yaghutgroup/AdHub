@@ -24,6 +24,8 @@ public class AdHub {
             @Override
             public void OnResponse(String result) {
                 try {
+                    Log.d("----- Result", result);
+
                     JSONObject obj = new JSONObject(result);
                     String tapsell = obj.optString("tapsell", "");
                     String admob = obj.optString("admob", "");
@@ -63,8 +65,6 @@ public class AdHub {
                         String zoneId = obj.optString("zone_id", "");
                         String advertiseType = obj.optString("advertise_type", "");
 
-                        Log.d("----- Advertise Type", advertiseType);
-
                         if (advertiseType.equals("admob")) {
                             AdMob.showVideoAd(context, zoneId, adShowListener);
                         }
@@ -101,6 +101,8 @@ public class AdHub {
                     @Override
                     public void OnResponse(String result) {
                         try {
+                            Log.d("----- Result", result);
+
                             JSONObject obj = new JSONObject(result);
                             String zoneId = obj.optString("zone_id", "");
                             String advertiseType = obj.optString("advertise_type", "");
@@ -125,6 +127,8 @@ public class AdHub {
                     @Override
                     public void OnResponse(String result) {
                         try {
+                            Log.d("----- Result", result);
+
                             JSONObject obj = new JSONObject(result);
                             String zoneId = obj.optString("zone_id", "");
                             String advertiseType = obj.optString("advertise_type", "");
@@ -149,6 +153,8 @@ public class AdHub {
                     @Override
                     public void OnResponse(String result) {
                         try {
+                            Log.d("----- Result", result);
+
                             JSONObject obj = new JSONObject(result);
                             String zoneId = obj.optString("zone_id", "");
                             String advertiseType = obj.optString("advertise_type", "");
