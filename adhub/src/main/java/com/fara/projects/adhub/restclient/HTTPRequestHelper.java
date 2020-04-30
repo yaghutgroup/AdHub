@@ -15,19 +15,18 @@ public class HTTPRequestHelper {
     }
 
     public void getAllSdkAppIDFromServer(Context context, OnCallBackListener callBackListener) {
-        new GetAllSdkAppID(context, callBackListener);
+        new GetAllSdkAppID(context, callBackListener).execute();
     }
 
     public void getVideoAdFromServer(Context context, String zoneId, OnCallBackListener callBackListener) {
-        Log.d("-----", "step 2");
-        new GetVideoAd(context, zoneId, callBackListener);
+        new GetVideoAd(context, zoneId, callBackListener).execute();
     }
 
     public void getBannerStandardAdFromServer(Context context, String zoneId, OnCallBackListener callBackListener) {
-        new GetBannerStandardAd(context, zoneId, callBackListener);
+        new GetBannerStandardAd(context, zoneId, callBackListener).execute();
     }
 
     public void getBannerNativeAdFromServer(final Context context, String zoneId, OnCallBackListener callBackListener) {
-        new GetBannerNativeAd(context, zoneId, callBackListener);
+        new GetBannerNativeAd(context, zoneId, callBackListener).execute();
     }
 }
