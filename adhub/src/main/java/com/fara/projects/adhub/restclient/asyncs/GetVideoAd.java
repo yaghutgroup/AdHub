@@ -32,8 +32,6 @@ public class GetVideoAd extends AsyncTask<Void, Void, String> {
 
     @Override
     protected String doInBackground(Void... voids) {
-        Log.d("-----", "step 4");
-
         String responseBody = "";
 
         try {

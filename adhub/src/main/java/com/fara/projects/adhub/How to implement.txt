@@ -1,0 +1,42 @@
+-------------------------
+AndroidManifest.xml
+-------------------------
+
+---> step 1 :
+
+<uses-permission android:name="android.permission.INTERNET" />
+
+---> step 2 :
+
+<application
+    ...
+    android:usesCleartextTraffic="true"
+    ...>
+    ...
+</application>
+
+--- > step 3 :
+
+<meta-data
+    android:name="com.google.android.gms.ads.APPLICATION_ID"
+    android:value="ca-app-pub-1593226622704185~2756903278"/>
+
+-------------------------
+build.gradle (project)
+-------------------------
+
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+-------------------------
+build.gradle (app)
+-------------------------
+
+dependencies {
+   implementation 'com.github.yaghutgroup:AdHub:Tag'
+}
+

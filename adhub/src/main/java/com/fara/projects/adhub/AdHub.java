@@ -57,6 +57,8 @@ public class AdHub {
                 @Override
                 public void OnResponse(String result) {
                     try {
+                        Log.d("----- Result", "result");
+
                         JSONObject obj = new JSONObject(result);
                         String zoneId = obj.optString("zone_id", "");
                         String advertiseType = obj.optString("advertise_type", "");
