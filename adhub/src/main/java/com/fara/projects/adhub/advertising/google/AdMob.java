@@ -21,13 +21,18 @@ import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
 public class AdMob {
     public static void showVideoAd(final Context context, final String zoneId, final AdHub.VideoAd.OnAdShowListener adShowListener) {
-        RewardedVideoAd mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(context);
+        final RewardedVideoAd mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(context);
         mRewardedVideoAd.setRewardedVideoAdListener(new RewardedVideoAdListener() {
             @Override
             public void onRewardedVideoAdLoaded() {
                 if (adShowListener != null) {
                     adShowListener.onAdLoaded();
                 }
+
+                if (mRewardedVideoAd.isLoaded()) {
+                    mRewardedVideoAd.show();
+                }
+
             }
 
             @Override
