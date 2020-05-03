@@ -161,6 +161,8 @@ public class AdMob {
         adView.setAdSize(new AdSize(280, 80));
         adView.setAdUnitId(zoneId);
 
+        adContainer.addView(adView);
+
         adView.setVideoOptions(new VideoOptions.Builder().setStartMuted(true).build());
 
         VideoController videoController = adView.getVideoController();
@@ -223,7 +225,6 @@ public class AdMob {
             }
         });
 
-        adContainer.addView(adView);
         adView.loadAd(new AdRequest.Builder().build());
     }
 
