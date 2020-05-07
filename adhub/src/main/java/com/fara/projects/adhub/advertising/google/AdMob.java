@@ -225,7 +225,7 @@ public class AdMob {
             }
         });
 
-        adView.loadAd(new AdRequest.Builder().build());
+        adView.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
     }
 
     private static void buildNativeMediumViewAd(Context context, String zoneId, RelativeLayout adContainer, final AdHub.BannerAd.OnAdShowListener adShowListener) {
