@@ -30,4 +30,5 @@ dependencies {
 
     //for adMob
     implementation 'com.google.android.gms:play-services-ads:19.1.0'
+    implementation 'com.google.firebase:firebase-ads:19.1.0'
 }
