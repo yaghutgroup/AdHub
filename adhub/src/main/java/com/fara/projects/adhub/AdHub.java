@@ -167,6 +167,8 @@ public class AdHub {
 
                             if (advertiseType.equals("admob")) {
                                 AdMob.showStandardBannerAd(context, zoneId, bannerType, adContainer, onAdShowListener);
+                            } else if (advertiseType.equals("tapsell")) {
+                                TapSell.showStandardBannerAd(context, zoneId, bannerType, adContainer, onAdShowListener);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
