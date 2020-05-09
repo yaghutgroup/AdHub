@@ -96,7 +96,7 @@ public class AdHub {
             private NativeTemplateType templateType;
             private RelativeLayout adContainer;
 
-            public static void showDefaultAd(final Context context, String zoneId, final NativeTemplateType templateType, final RelativeLayout adContainer, final OnAdShowListener onAdShowListener) {
+            public static void showDefaultAd(final Context context, String zoneId, final NativeTemplateType templateType, final RelativeLayout adContainer, final String testDeviceId, final OnAdShowListener onAdShowListener) {
                 new HTTPRequestHelper().getBannerNativeAdFromServer(context, zoneId, new HTTPRequestHelper.OnCallBackListener() {
                     @Override
                     public void OnResponse(String result) {
@@ -108,7 +108,7 @@ public class AdHub {
                             String advertiseType = obj.optString("advertise_type", "");
 
                             if (advertiseType.equals("admob")) {
-                                AdMob.showDefaultNativeAd(context, zoneId, templateType, adContainer, onAdShowListener);
+                                AdMob.showDefaultNativeAd(context, zoneId, templateType, adContainer, testDeviceId, onAdShowListener);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

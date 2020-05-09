@@ -13,11 +13,15 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.NativeExpressAdView;
+import com.google.android.gms.ads.RequestConfiguration;
 import com.google.android.gms.ads.VideoController;
 import com.google.android.gms.ads.VideoOptions;
 import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class AdMob {
     public static void showVideoAd(final Context context, final String zoneId, final AdHub.VideoAd.OnAdShowListener adShowListener) {
@@ -139,7 +143,13 @@ public class AdMob {
         adView.loadAd(adRequest);
     }
 
-    public static void showDefaultNativeAd(final Context context, String zoneId, NativeTemplateType templateType, final RelativeLayout adContainer, AdHub.BannerAd.OnAdShowListener adShowListener) {
+    public static void showDefaultNativeAd(final Context context, String zoneId, NativeTemplateType templateType, final RelativeLayout adContainer, String testDeviceId, AdHub.BannerAd.OnAdShowListener adShowListener) {
+       if (testDeviceId != null || !testDeviceId.isEmpty()) {
+           List<String> testDeviceIds = Arrays.asList(testDeviceId);
+           RequestConfiguration configuration = new RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build();
+           MobileAds.setRequestConfiguration(configuration);
+       }
+
         if (templateType.getValue().equals(NativeTemplateType.SMALL_VIEW.getValue())) {
             buildNativeSmallViewAd(context, zoneId, adContainer, adShowListener);
         } else if (templateType.getValue().equals(NativeTemplateType.MEDIUM_VIEW.getValue())) {
