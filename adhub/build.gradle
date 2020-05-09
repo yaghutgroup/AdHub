@@ -1,5 +1,11 @@
 apply plugin: 'com.android.library'
 
+allprojects {
+    repositories {
+        maven { url 'https://dl.bintray.com/tapsellorg/maven' }
+    }
+}
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -31,4 +37,7 @@ dependencies {
     //for adMob
     implementation 'com.google.android.gms:play-services-ads:19.1.0'
     implementation 'com.google.firebase:firebase-ads:19.1.0'
+
+    //for tapsell
+    implementation 'ir.tapsell.sdk:tapsell-sdk-android:4.5.0'
 }

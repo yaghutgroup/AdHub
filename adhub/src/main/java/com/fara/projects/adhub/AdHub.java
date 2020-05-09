@@ -5,7 +5,8 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.RelativeLayout;
 
-import com.fara.projects.adhub.advertising.google.AdMob;
+import com.fara.projects.adhub.advertising.AdMob;
+import com.fara.projects.adhub.advertising.TapSell;
 import com.fara.projects.adhub.enums.BannerType;
 import com.fara.projects.adhub.enums.NativeTemplateType;
 import com.fara.projects.adhub.restclient.HTTPRequestHelper;
@@ -15,6 +16,8 @@ import com.google.android.gms.ads.MobileAds;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import ir.tapsell.sdk.Tapsell;
 
 public class AdHub {
     public static void initialize(final Application application, String appId) {
@@ -27,11 +30,12 @@ public class AdHub {
                     Log.d("----- Result", result);
 
                     JSONObject obj = new JSONObject(result);
-                    String tapsell = obj.optString("tapsell", "");
                     String admob = obj.optString("admob", "");
                     String yad = obj.optString("yad", "");
+                    String tapsell = obj.optString("tapsell", "");
 
                     MobileAds.initialize(application, admob);
+                    Tapsell.initialize(application, tapsell);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -67,6 +71,8 @@ public class AdHub {
 
                         if (advertiseType.equals("admob")) {
                             AdMob.showVideoAd(context, zoneId, adShowListener);
+                        } else if (advertiseType.equals("tapsell")) {
+                            TapSell.showVideoAd(context, zoneId, adShowListener);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

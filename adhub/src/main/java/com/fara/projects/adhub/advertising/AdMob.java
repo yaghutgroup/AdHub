@@ -1,4 +1,4 @@
-package com.fara.projects.adhub.advertising.google;
+package com.fara.projects.adhub.advertising;
 
 import android.content.Context;
 import android.widget.RelativeLayout;
@@ -160,6 +160,8 @@ public class AdMob {
     public static void showCustomNativeAd() {
         buildNativeCustomViewAd();
     }
+
+    /*---- Native Section ----*/
 
     private static void buildNativeSmallViewAd(Context context, String zoneId, RelativeLayout adContainer, final AdHub.BannerAd.OnAdShowListener adShowListener) {
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
