@@ -134,7 +134,7 @@ public class TapSell {
         });
     }
 
-    public static void showDefaultNativeAd(final Context context, String zoneId, NativeTemplateType templateType, final RelativeLayout adContainer, String testDeviceId, AdHub.BannerAd.OnAdShowListener adShowListener) {
+    public static void showDefaultNativeAd(final Context context, String zoneId, NativeTemplateType templateType, final RelativeLayout adContainer, AdHub.BannerAd.OnAdShowListener adShowListener) {
         String[] splitZoneId = zoneId.split("\\*");
 
         if (templateType.getValue().equals(NativeTemplateType.SMALL_VIEW.getValue())) {
