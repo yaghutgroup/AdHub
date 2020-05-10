@@ -7,11 +7,13 @@ import android.widget.RelativeLayout;
 
 import com.fara.projects.adhub.advertising.AdMob;
 import com.fara.projects.adhub.advertising.TapSell;
+import com.fara.projects.adhub.advertising.Yads;
 import com.fara.projects.adhub.enums.BannerType;
 import com.fara.projects.adhub.enums.NativeTemplateType;
 import com.fara.projects.adhub.restclient.HTTPRequestHelper;
 import com.fara.projects.adhub.utils.NativeTemplateLayouts;
 import com.fara.projects.adhub.utils.SharedPreferencesManager;
+import com.fara.yad.Yad;
 import com.google.android.gms.ads.MobileAds;
 
 import org.json.JSONException;
@@ -35,6 +37,7 @@ public class AdHub {
                     String tapsell = obj.optString("tapsell", "");
 
                     MobileAds.initialize(application, admob);
+                    Yad.initialize(application, yad);
                     Tapsell.initialize(application, tapsell);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -74,7 +77,7 @@ public class AdHub {
                         } else if (advertiseType.equals("tapsell")) {
                             TapSell.showVideoAd(context, zoneId, adShowListener);
                         } else if (advertiseType.equals("yad")) {
-                            // TODO
+                            Yads.showVideoAd(context, zoneId, adShowListener);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -182,7 +185,7 @@ public class AdHub {
                             } else if (advertiseType.equals("tapsell")) {
                                 TapSell.showStandardBannerAd(context, zoneId, bannerType, adContainer, onAdShowListener);
                             } else if (advertiseType.equals("yad")) {
-                                // TODO
+                                Yads.showStandardBannerAd(context, zoneId, bannerType, adContainer, onAdShowListener);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
