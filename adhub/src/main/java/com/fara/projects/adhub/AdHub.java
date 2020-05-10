@@ -73,6 +73,8 @@ public class AdHub {
                             AdMob.showVideoAd(context, zoneId, adShowListener);
                         } else if (advertiseType.equals("tapsell")) {
                             TapSell.showVideoAd(context, zoneId, adShowListener);
+                        } else if (advertiseType.equals("yad")) {
+                            // TODO
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -115,6 +117,10 @@ public class AdHub {
 
                             if (advertiseType.equals("admob")) {
                                 AdMob.showDefaultNativeAd(context, zoneId, templateType, adContainer, testDeviceId, onAdShowListener);
+                            } else if (advertiseType.equals("tapsell")) {
+                                // TODO
+                            } else if (advertiseType.equals("yad")) {
+                                // TODO
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -139,7 +145,13 @@ public class AdHub {
                             String zoneId = obj.optString("zone_id", "");
                             String advertiseType = obj.optString("advertise_type", "");
 
-                            // TODO
+                            if (advertiseType.equals("admob")) {
+                                // TODO
+                            } else if (advertiseType.equals("tapsell")) {
+                                // TODO
+                            } else if (advertiseType.equals("yad")) {
+                                // TODO
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -169,6 +181,8 @@ public class AdHub {
                                 AdMob.showStandardBannerAd(context, zoneId, bannerType, adContainer, onAdShowListener);
                             } else if (advertiseType.equals("tapsell")) {
                                 TapSell.showStandardBannerAd(context, zoneId, bannerType, adContainer, onAdShowListener);
+                            } else if (advertiseType.equals("yad")) {
+                                // TODO
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
