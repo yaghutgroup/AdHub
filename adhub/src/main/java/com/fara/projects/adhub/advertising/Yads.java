@@ -77,7 +77,7 @@ public class Yads {
         });
     }
 
-    public static void showDefaultNativeAd(final Context context, String zoneId, NativeTemplateType templateType, final RelativeLayout adContainer, String testDeviceId, AdHub.BannerAd.OnAdShowListener adShowListener) {
+    public static void showDefaultNativeAd(final Context context, String zoneId, NativeTemplateType templateType, final RelativeLayout adContainer, AdHub.BannerAd.OnAdShowListener adShowListener) {
         if (templateType.getValue().equals(NativeTemplateType.SMALL_VIEW.getValue())) {
             buildNativeSmallViewAd(context, zoneId, adContainer, adShowListener);
         } else if (templateType.getValue().equals(NativeTemplateType.MEDIUM_VIEW.getValue())) {
