@@ -6,6 +6,7 @@ import android.widget.RelativeLayout;
 import com.fara.projects.adhub.AdHub;
 import com.fara.projects.adhub.R;
 import com.fara.projects.adhub.enums.BannerType;
+import com.fara.projects.adhub.enums.NativeTemplateType;
 
 import ir.tapsell.sdk.Tapsell;
 import ir.tapsell.sdk.TapsellAdRequestListener;
@@ -126,5 +127,31 @@ public class TapSell {
                     onAdShowListener.onAdClosed();
             }
         });
+    }
+
+    public static void showDefaultNativeAd(final Context context, String zoneId, NativeTemplateType templateType, final RelativeLayout adContainer, String testDeviceId, AdHub.BannerAd.OnAdShowListener adShowListener) {
+        if (templateType.getValue().equals(NativeTemplateType.SMALL_VIEW.getValue())) {
+            buildNativeSmallViewAd(context, zoneId, adContainer, adShowListener);
+        } else if (templateType.getValue().equals(NativeTemplateType.MEDIUM_VIEW.getValue())) {
+            buildNativeMediumViewAd(context, zoneId, adContainer, adShowListener);
+        }
+    }
+
+    public static void showCustomNativeAd() {
+        buildNativeCustomViewAd();
+    }
+
+    /*---- Native Section ----*/
+
+    private static void buildNativeSmallViewAd(Context context, String zoneId, RelativeLayout adContainer, final AdHub.BannerAd.OnAdShowListener adShowListener) {
+        // TODO
+    }
+
+    private static void buildNativeMediumViewAd(Context context, String zoneId, RelativeLayout adContainer, final AdHub.BannerAd.OnAdShowListener adShowListener) {
+        // TODO
+    }
+
+    private static void buildNativeCustomViewAd() {
+        // TODO
     }
 }

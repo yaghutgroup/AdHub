@@ -5,7 +5,9 @@ import android.widget.RelativeLayout;
 
 import com.fara.projects.adhub.AdHub;
 import com.fara.projects.adhub.enums.BannerType;
+import com.fara.projects.adhub.enums.NativeTemplateType;
 import com.fara.yad.Yad;
+import com.fara.yad.enums.TemplateType;
 
 public class Yads {
     public static void showVideoAd(final Context context, final String zoneId, final AdHub.VideoAd.OnAdShowListener adShowListener) {
@@ -73,5 +75,55 @@ public class Yads {
                     onAdShowListener.onAdFailed(message);
             }
         });
+    }
+
+    public static void showDefaultNativeAd(final Context context, String zoneId, NativeTemplateType templateType, final RelativeLayout adContainer, String testDeviceId, AdHub.BannerAd.OnAdShowListener adShowListener) {
+        if (templateType.getValue().equals(NativeTemplateType.SMALL_VIEW.getValue())) {
+            buildNativeSmallViewAd(context, zoneId, adContainer, adShowListener);
+        } else if (templateType.getValue().equals(NativeTemplateType.MEDIUM_VIEW.getValue())) {
+            buildNativeMediumViewAd(context, zoneId, adContainer, adShowListener);
+        }
+    }
+
+    public static void showCustomNativeAd() {
+        buildNativeCustomViewAd();
+    }
+
+    /*---- Native Section ----*/
+
+    private static void buildNativeSmallViewAd(Context context, String zoneId, RelativeLayout adContainer, final AdHub.BannerAd.OnAdShowListener adShowListener) {
+        Yad.BannerAd.Native.showAd(context, zoneId, TemplateType.SMALL_VIEW, adContainer, 0, new Yad.BannerAd.OnAdShowListener() {
+            @Override
+            public void onFilled() {
+                if (adShowListener != null)
+                    adShowListener.onAdLoaded();
+            }
+
+            @Override
+            public void onError(String message) {
+                if (adShowListener != null)
+                    adShowListener.onAdFailed(message);
+            }
+        });
+    }
+
+    private static void buildNativeMediumViewAd(Context context, String zoneId, RelativeLayout adContainer, final AdHub.BannerAd.OnAdShowListener adShowListener) {
+        Yad.BannerAd.Native.showAd(context, zoneId, TemplateType.MEDIUM_VIEW, adContainer, 0, new Yad.BannerAd.OnAdShowListener() {
+            @Override
+            public void onFilled() {
+                if (adShowListener != null)
+                    adShowListener.onAdLoaded();
+            }
+
+            @Override
+            public void onError(String message) {
+                if (adShowListener != null)
+                    adShowListener.onAdFailed(message);
+            }
+        });
+    }
+
+    private static void buildNativeCustomViewAd() {
+        // TODO
     }
 }
