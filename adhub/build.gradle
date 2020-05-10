@@ -1,11 +1,5 @@
 apply plugin: 'com.android.library'
 
-allprojects {
-    repositories {
-        maven { url 'https://dl.bintray.com/tapsellorg/maven' }
-    }
-}
-
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
