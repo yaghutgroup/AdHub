@@ -123,7 +123,7 @@ public class AdHub {
                             } else if (advertiseType.equals("tapsell")) {
                                 // TODO
                             } else if (advertiseType.equals("yad")) {
-                                Yads.showDefaultNativeAd(context, zoneId, NativeTemplateType.SMALL_VIEW, adContainer, onAdShowListener);
+                                Yads.showDefaultNativeAd(context, zoneId, templateType, adContainer, onAdShowListener);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
