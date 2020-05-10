@@ -22,16 +22,6 @@ AndroidManifest.xml
     android:value="ca-app-pub-1593226622704185~2756903278"/>
 
 -------------------------
-build.gradle (app)
--------------------------
-
-allprojects {
-    repositories {
-        maven { url 'https://dl.bintray.com/tapsellorg/maven' }
-    }
-}
-
--------------------------
 build.gradle (project)
 -------------------------
 
@@ -39,6 +29,7 @@ allprojects {
     repositories {
         ...
         maven { url 'https://jitpack.io' }
+        maven { url 'https://dl.bintray.com/tapsellorg/maven' }
     }
 }
 
