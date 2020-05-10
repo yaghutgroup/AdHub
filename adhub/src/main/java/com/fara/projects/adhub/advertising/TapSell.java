@@ -1,6 +1,8 @@
 package com.fara.projects.adhub.advertising;
 
 import android.content.Context;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.fara.projects.adhub.AdHub;
@@ -8,6 +10,7 @@ import com.fara.projects.adhub.R;
 import com.fara.projects.adhub.enums.BannerType;
 import com.fara.projects.adhub.enums.NativeTemplateType;
 
+import ir.tapsell.sdk.AdRequestCallback;
 import ir.tapsell.sdk.Tapsell;
 import ir.tapsell.sdk.TapsellAdRequestListener;
 import ir.tapsell.sdk.TapsellAdRequestOptions;
@@ -16,6 +19,8 @@ import ir.tapsell.sdk.TapsellShowOptions;
 import ir.tapsell.sdk.bannerads.TapsellBannerType;
 import ir.tapsell.sdk.bannerads.TapsellBannerView;
 import ir.tapsell.sdk.bannerads.TapsellBannerViewEventListener;
+import ir.tapsell.sdk.nativeads.TapsellNativeBannerManager;
+import ir.tapsell.sdk.nativeads.TapsellNativeBannerViewManager;
 
 public class TapSell {
     public static void showVideoAd(final Context context, final String zoneId, final AdHub.VideoAd.OnAdShowListener adShowListener) {
@@ -130,10 +135,12 @@ public class TapSell {
     }
 
     public static void showDefaultNativeAd(final Context context, String zoneId, NativeTemplateType templateType, final RelativeLayout adContainer, String testDeviceId, AdHub.BannerAd.OnAdShowListener adShowListener) {
+        String[] splitZoneId = zoneId.split("\\*");
+
         if (templateType.getValue().equals(NativeTemplateType.SMALL_VIEW.getValue())) {
-            buildNativeSmallViewAd(context, zoneId, adContainer, adShowListener);
+            buildNativeSmallViewAd(context, splitZoneId[0], adContainer, adShowListener);
         } else if (templateType.getValue().equals(NativeTemplateType.MEDIUM_VIEW.getValue())) {
-            buildNativeMediumViewAd(context, zoneId, adContainer, adShowListener);
+            buildNativeMediumViewAd(context, splitZoneId[1], adContainer, adShowListener);
         }
     }
 
@@ -143,12 +150,88 @@ public class TapSell {
 
     /*---- Native Section ----*/
 
-    private static void buildNativeSmallViewAd(Context context, String zoneId, RelativeLayout adContainer, final AdHub.BannerAd.OnAdShowListener adShowListener) {
-        // TODO
+    private static void buildNativeSmallViewAd(final Context context, final String zoneId, RelativeLayout adContainer, final AdHub.BannerAd.OnAdShowListener adShowListener) {
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+
+        FrameLayout frameLayout = new FrameLayout(context);
+        frameLayout.setLayoutParams(layoutParams);
+        frameLayout.setId(R.id.adBannerNative);
+
+        adContainer.addView(frameLayout);
+
+        ViewGroup viewGroup = frameLayout;
+
+        final TapsellNativeBannerViewManager nativeBannerViewManager = new TapsellNativeBannerManager
+                .Builder()
+                .setParentView(viewGroup)
+                .setContentViewTemplate(R.layout.tapsell_content_banner_ad_template)
+                .setAppInstallationViewTemplate(R.layout.tapsell_app_installation_banner_ad_template)
+                .inflateTemplate(context);
+
+        TapsellNativeBannerManager.getAd(context, zoneId,
+                new AdRequestCallback() {
+                    @Override
+                    public void onResponse(String[] adId) {
+                        TapsellNativeBannerManager.bindAd(
+                                context,
+                                nativeBannerViewManager,
+                                zoneId,
+                                adId[0]);
+
+                        if (adShowListener != null) {
+                            adShowListener.onAdLoaded();
+                        }
+                    }
+
+                    @Override
+                    public void onFailed(String message) {
+                        if (adShowListener != null) {
+                            adShowListener.onAdFailed(message);
+                        }
+                    }
+                });
     }
 
-    private static void buildNativeMediumViewAd(Context context, String zoneId, RelativeLayout adContainer, final AdHub.BannerAd.OnAdShowListener adShowListener) {
-        // TODO
+    private static void buildNativeMediumViewAd(final Context context, final String zoneId, RelativeLayout adContainer, final AdHub.BannerAd.OnAdShowListener adShowListener) {
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+
+        FrameLayout frameLayout = new FrameLayout(context);
+        frameLayout.setLayoutParams(layoutParams);
+        frameLayout.setId(R.id.adBannerNative);
+
+        adContainer.addView(frameLayout);
+
+        ViewGroup viewGroup = frameLayout;
+
+        final TapsellNativeBannerViewManager nativeBannerViewManager = new TapsellNativeBannerManager
+                .Builder()
+                .setParentView(viewGroup)
+                .setContentViewTemplate(R.layout.tapsell_content_banner_ad_template)
+                .setAppInstallationViewTemplate(R.layout.tapsell_app_installation_banner_ad_template)
+                .inflateTemplate(context);
+
+        TapsellNativeBannerManager.getAd(context, zoneId,
+                new AdRequestCallback() {
+                    @Override
+                    public void onResponse(String[] adId) {
+                        TapsellNativeBannerManager.bindAd(
+                                context,
+                                nativeBannerViewManager,
+                                zoneId,
+                                adId[0]);
+
+                        if (adShowListener != null) {
+                            adShowListener.onAdLoaded();
+                        }
+                    }
+
+                    @Override
+                    public void onFailed(String message) {
+                        if (adShowListener != null) {
+                            adShowListener.onAdFailed(message);
+                        }
+                    }
+                });
     }
 
     private static void buildNativeCustomViewAd() {
