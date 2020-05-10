@@ -164,7 +164,7 @@ public class TapSell {
         final TapsellNativeBannerViewManager nativeBannerViewManager = new TapsellNativeBannerManager
                 .Builder()
                 .setParentView(viewGroup)
-                .setContentViewTemplate(R.layout.tapsell_content_banner_ad_template)
+                .setContentViewTemplate(R.layout.tapsell_small_content_banner_ad_template)
                 .setAppInstallationViewTemplate(R.layout.tapsell_app_installation_banner_ad_template)
                 .inflateTemplate(context);
 
