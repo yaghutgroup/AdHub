@@ -22,6 +22,7 @@ import com.google.android.gms.ads.NativeExpressAdView;
 import com.google.android.gms.ads.RequestConfiguration;
 import com.google.android.gms.ads.VideoController;
 import com.google.android.gms.ads.VideoOptions;
+import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
 import com.google.android.gms.ads.formats.NativeCustomTemplateAd;
 import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
@@ -333,6 +334,8 @@ public class AdMob {
                             }
                         },
                         null).build();
+
+        adLoader.loadAd(new PublisherAdRequest.Builder().build());
     }
 
     private static void displayCustomTemplateAd (ViewGroup parent, final NativeCustomTemplateAd ad, int yourTemplateLayout) {
