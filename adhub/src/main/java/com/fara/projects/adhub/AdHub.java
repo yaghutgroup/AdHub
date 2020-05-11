@@ -151,7 +151,7 @@ public class AdHub {
                             if (advertiseType.equals("admob")) {
                                 // TODO
                             } else if (advertiseType.equals("tapsell")) {
-                                // TODO
+                                TapSell.showCustomNativeAd(context, zoneId, adContainer, templateLayouts.getYadTemplateLayout(), onAdShowListener);
                             } else if (advertiseType.equals("yad")) {
                                 Yads.showCustomNativeAd(context, zoneId, adContainer, templateLayouts.getYadTemplateLayout(), onAdShowListener);
                             }
