@@ -165,7 +165,13 @@ public class AdMob {
         }
     }
 
-    public static void showCustomNativeAd(Context context, String zoneId, RelativeLayout adContainer, int yourTemplateLayout, final AdHub.BannerAd.OnAdShowListener adShowListener) {
+    public static void showCustomNativeAd(Context context, String zoneId, RelativeLayout adContainer, int yourTemplateLayout, String testDeviceId, final AdHub.BannerAd.OnAdShowListener adShowListener) {
+        if (testDeviceId != null || !testDeviceId.isEmpty()) {
+            List<String> testDeviceIds = Arrays.asList(testDeviceId);
+            RequestConfiguration configuration = new RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build();
+            MobileAds.setRequestConfiguration(configuration);
+        }
+
         buildNativeCustomViewAd(context, zoneId, adContainer, yourTemplateLayout, adShowListener);
     }
 

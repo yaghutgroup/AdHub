@@ -137,7 +137,7 @@ public class AdHub {
                 });
             }
 
-            public static void showCustomAd(final Context context, String zoneId, final NativeTemplateLayouts templateLayouts, final RelativeLayout adContainer, final OnAdShowListener onAdShowListener) {
+            public static void showCustomAd(final Context context, String zoneId, final NativeTemplateLayouts templateLayouts, final RelativeLayout adContainer, final String testDeviceId, final OnAdShowListener onAdShowListener) {
                 new HTTPRequestHelper().getBannerNativeAdFromServer(context, zoneId, new HTTPRequestHelper.OnCallBackListener() {
                     @Override
                     public void OnResponse(String result) {
@@ -149,7 +149,7 @@ public class AdHub {
                             String advertiseType = obj.optString("advertise_type", "");
 
                             if (advertiseType.equals("admob")) {
-                                AdMob.showCustomNativeAd(context, zoneId, adContainer, templateLayouts.getAdmobTemplateLayout(), onAdShowListener);
+                                AdMob.showCustomNativeAd(context, zoneId, adContainer, templateLayouts.getAdmobTemplateLayout(), testDeviceId, onAdShowListener);
                             } else if (advertiseType.equals("tapsell")) {
                                 TapSell.showCustomNativeAd(context, zoneId, adContainer, templateLayouts.getTapsellTemplateLayout(), onAdShowListener);
                             } else if (advertiseType.equals("yad")) {
