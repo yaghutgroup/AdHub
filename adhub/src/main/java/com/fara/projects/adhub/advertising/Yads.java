@@ -85,8 +85,8 @@ public class Yads {
         }
     }
 
-    public static void showCustomNativeAd() {
-        buildNativeCustomViewAd();
+    public static void showCustomNativeAd(Context context, String zoneId, RelativeLayout adContainer, int yourTemplateLayout, final AdHub.BannerAd.OnAdShowListener adShowListener) {
+        buildNativeCustomViewAd(context, zoneId, adContainer, yourTemplateLayout, adShowListener);
     }
 
     /*---- Native Section ----*/
@@ -123,7 +123,19 @@ public class Yads {
         });
     }
 
-    private static void buildNativeCustomViewAd() {
-        // TODO
+    private static void buildNativeCustomViewAd(Context context, String zoneId, RelativeLayout adContainer, int yourTemplateLayout, final AdHub.BannerAd.OnAdShowListener adShowListener) {
+        Yad.BannerAd.Native.showAd(context, zoneId, TemplateType.CUSTOM_VIEW, adContainer, yourTemplateLayout, new Yad.BannerAd.OnAdShowListener() {
+            @Override
+            public void onFilled() {
+                if (adShowListener != null)
+                    adShowListener.onAdLoaded();
+            }
+
+            @Override
+            public void onError(String message) {
+                if (adShowListener != null)
+                    adShowListener.onAdFailed(message);
+            }
+        });
     }
 }

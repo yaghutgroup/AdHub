@@ -137,7 +137,7 @@ public class AdHub {
                 });
             }
 
-            public static void showCustomAd(final Context context, String zoneId, NativeTemplateLayouts templateLayouts, final RelativeLayout adContainer) {
+            public static void showCustomAd(final Context context, String zoneId, final NativeTemplateLayouts templateLayouts, final RelativeLayout adContainer, final OnAdShowListener onAdShowListener) {
                 new HTTPRequestHelper().getBannerNativeAdFromServer(context, zoneId, new HTTPRequestHelper.OnCallBackListener() {
                     @Override
                     public void OnResponse(String result) {
@@ -153,7 +153,7 @@ public class AdHub {
                             } else if (advertiseType.equals("tapsell")) {
                                 // TODO
                             } else if (advertiseType.equals("yad")) {
-                                // TODO
+                                Yads.showCustomNativeAd(context, zoneId, adContainer, templateLayouts.getYadTemplateLayout(), onAdShowListener);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
