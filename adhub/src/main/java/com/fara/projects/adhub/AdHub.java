@@ -149,7 +149,7 @@ public class AdHub {
                             String advertiseType = obj.optString("advertise_type", "");
 
                             if (advertiseType.equals("admob")) {
-                                // TODO
+                                AdMob.showCustomNativeAd(context, zoneId, adContainer, templateLayouts.getAdmobTemplateLayout(), onAdShowListener);
                             } else if (advertiseType.equals("tapsell")) {
                                 TapSell.showCustomNativeAd(context, zoneId, adContainer, templateLayouts.getTapsellTemplateLayout(), onAdShowListener);
                             } else if (advertiseType.equals("yad")) {

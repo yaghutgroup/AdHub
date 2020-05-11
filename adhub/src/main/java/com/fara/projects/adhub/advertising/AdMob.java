@@ -1,13 +1,19 @@
 package com.fara.projects.adhub.advertising;
 
 import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.fara.projects.adhub.AdHub;
 import com.fara.projects.adhub.R;
 import com.fara.projects.adhub.enums.BannerType;
 import com.fara.projects.adhub.enums.NativeTemplateType;
 import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
@@ -16,6 +22,7 @@ import com.google.android.gms.ads.NativeExpressAdView;
 import com.google.android.gms.ads.RequestConfiguration;
 import com.google.android.gms.ads.VideoController;
 import com.google.android.gms.ads.VideoOptions;
+import com.google.android.gms.ads.formats.NativeCustomTemplateAd;
 import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
@@ -157,8 +164,8 @@ public class AdMob {
         }
     }
 
-    public static void showCustomNativeAd() {
-        buildNativeCustomViewAd();
+    public static void showCustomNativeAd(Context context, String zoneId, RelativeLayout adContainer, int yourTemplateLayout, final AdHub.BannerAd.OnAdShowListener adShowListener) {
+        buildNativeCustomViewAd(context, zoneId, adContainer, yourTemplateLayout, adShowListener);
     }
 
     /*---- Native Section ----*/
@@ -316,7 +323,40 @@ public class AdMob {
         adView.loadAd(new AdRequest.Builder().build());
     }
 
-    private static void buildNativeCustomViewAd() {
-        // TODO
+    private static void buildNativeCustomViewAd(Context context, String zoneId, final RelativeLayout adContainer, final int yourTemplateLayout, final AdHub.BannerAd.OnAdShowListener adShowListener) {
+        AdLoader adLoader = new AdLoader.Builder(context, zoneId).forCustomTemplateAd("10063170", new NativeCustomTemplateAd.OnCustomTemplateAdLoadedListener() {
+                            @Override
+                            public void onCustomTemplateAdLoaded(NativeCustomTemplateAd ad) {
+                                // Display ad and record impression
+                                ViewGroup adView = (ViewGroup) adContainer;
+                                displayCustomTemplateAd(adView, ad, yourTemplateLayout);
+                            }
+                        },
+                        null).build();
+    }
+
+    private static void displayCustomTemplateAd (ViewGroup parent, final NativeCustomTemplateAd ad, int yourTemplateLayout) {
+        // Inflate a layout and add it to the parent ViewGroup.
+        LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View adView = inflater.inflate(yourTemplateLayout, parent);
+
+        // Show the custom template
+        TextView headline = adView.findViewById(R.id.headline);
+        TextView caption = adView.findViewById(R.id.caption);
+        ImageView mainImage = adView.findViewById(R.id.mainImage);
+        headline.setText(ad.getText("Headline"));
+        caption.setText(ad.getText("Caption"));
+        mainImage.setImageDrawable(ad.getImage("MainImage").getDrawable());
+
+        // Record an impression
+        ad.recordImpression();
+
+        // Handle clicks on image
+        mainImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ad.performClick("MainImage");
+            }
+        });
     }
 }

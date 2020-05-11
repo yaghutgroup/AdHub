@@ -3,4 +3,9 @@
     <item type="id" name="adBannerStandard" />
     <item type="id" name="adBannerNative" />
     <item type="id" name="adVideo" />
+
+
+    <item type="id" name="headline" />
+    <item type="id" name="caption" />
+    <item type="id" name="mainImage" />
 </resources>
