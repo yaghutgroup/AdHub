@@ -144,8 +144,10 @@ public class TapSell {
         }
     }
 
-    public static void showCustomNativeAd() {
-        buildNativeCustomViewAd();
+    public static void showCustomNativeAd(Context context, String zoneId, RelativeLayout adContainer, int yourTemplateLayout, final AdHub.BannerAd.OnAdShowListener adShowListener) {
+        String[] splitZoneId = zoneId.split("\\*");
+
+        buildNativeCustomViewAd(context, splitZoneId[1], adContainer, yourTemplateLayout, adShowListener);
     }
 
     /*---- Native Section ----*/
@@ -233,7 +235,44 @@ public class TapSell {
                 });
     }
 
-    private static void buildNativeCustomViewAd() {
-        // TODO
+    private static void buildNativeCustomViewAd(final Context context, final String zoneId, RelativeLayout adContainer, int yourTemplateLayout, final AdHub.BannerAd.OnAdShowListener adShowListener) {
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+
+        FrameLayout frameLayout = new FrameLayout(context);
+        frameLayout.setLayoutParams(layoutParams);
+        frameLayout.setId(R.id.adBannerNative);
+
+        adContainer.addView(frameLayout);
+
+        ViewGroup viewGroup = frameLayout;
+
+        final TapsellNativeBannerViewManager nativeBannerViewManager = new TapsellNativeBannerManager
+                .Builder()
+                .setParentView(viewGroup)
+                .setContentViewTemplate(yourTemplateLayout)
+                .inflateTemplate(context);
+
+        TapsellNativeBannerManager.getAd(context, zoneId,
+                new AdRequestCallback() {
+                    @Override
+                    public void onResponse(String[] adId) {
+                        TapsellNativeBannerManager.bindAd(
+                                context,
+                                nativeBannerViewManager,
+                                zoneId,
+                                adId[0]);
+
+                        if (adShowListener != null) {
+                            adShowListener.onAdLoaded();
+                        }
+                    }
+
+                    @Override
+                    public void onFailed(String message) {
+                        if (adShowListener != null) {
+                            adShowListener.onAdFailed(message);
+                        }
+                    }
+                });
     }
 }
