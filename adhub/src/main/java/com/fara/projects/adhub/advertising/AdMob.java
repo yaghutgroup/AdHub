@@ -334,9 +334,12 @@ public class AdMob {
         AdLoader adLoader = new AdLoader.Builder(context, zoneId).forCustomTemplateAd("10063170", new NativeCustomTemplateAd.OnCustomTemplateAdLoadedListener() {
                             @Override
                             public void onCustomTemplateAdLoaded(NativeCustomTemplateAd ad) {
+                                if (adShowListener != null)
+                                    adShowListener.onAdLoaded();
+
                                 // Display ad and record impression
                                 ViewGroup adView = (ViewGroup) adContainer;
-                                displayCustomTemplateAd(adView, ad, yourTemplateLayout);
+                                displayCustomTemplateAd(adView, ad, yourTemplateLayout, adShowListener);
                             }
                         },
                         null).build();
@@ -344,7 +347,7 @@ public class AdMob {
         adLoader.loadAd(new PublisherAdRequest.Builder().build());
     }
 
-    private static void displayCustomTemplateAd (ViewGroup parent, final NativeCustomTemplateAd ad, int yourTemplateLayout) {
+    private static void displayCustomTemplateAd (ViewGroup parent, final NativeCustomTemplateAd ad, int yourTemplateLayout, final AdHub.BannerAd.OnAdShowListener adShowListener) {
         // Inflate a layout and add it to the parent ViewGroup.
         LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View adView = inflater.inflate(yourTemplateLayout, parent);
@@ -364,6 +367,9 @@ public class AdMob {
         mainImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (adShowListener != null)
+                    adShowListener.onAdClicked();
+
                 ad.performClick("MainImage");
             }
         });
